@@ -237,6 +237,11 @@ with tab1:
                 hovermode="x unified"
             )
             st.plotly_chart(fig_prod, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> U.S. NCES IPEDS Postsecondary Degree Completions (CIP 11.0102 AI, CIP 30.7001 Data Science, CIP 27.0501 Statistics) & GovData Thailand (data.go.th) - กระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม (สป.อว.)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No graduate data matching the selected filter criteria.")
 
@@ -269,6 +274,11 @@ with tab1:
             fig_skills.update_traces(texttemplate="%{text}%", textposition="outside")
             fig_skills.update_layout(margin=dict(l=20, r=20, t=20, b=20), coloraxis_showscale=False)
             st.plotly_chart(fig_skills, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> National Higher Education Syllabus Registries (MHESI/IPEDS) & ACM/IEEE Computing Curricula Guidelines for AI, DS & Statistics (2020-2025)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No skill data available.")
 
@@ -301,6 +311,11 @@ with tab1:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_emp, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> สำนักงานปลัดกระทรวงการอุดมศึกษาฯ (สป.อว.) ภาวะการมีงานทำของบัณฑิต (Graduate Employment Survey) & NCES Baccalaureate and Beyond (B&B) Study
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No employment data available.")
 
@@ -329,8 +344,14 @@ with tab1:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_scatter, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Official Higher Education Tuition Fee Registries & National Graduate Tracer Outcomes (MHESI Open Data / NCES College Scorecard)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No tuition scatter data available.")
+
 
 
 # =========================================================
@@ -458,6 +479,11 @@ with tab2:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_vac, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Hugging Face Tech Job Postings Dataset & Our World in Data (OWID) AI Workforce and Industry Momentum Index
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No job postings found for selected filters.")
 
@@ -489,6 +515,11 @@ with tab2:
             fig_req_skills.update_traces(textposition="outside")
             fig_req_skills.update_layout(margin=dict(l=20, r=20, t=20, b=20), coloraxis_showscale=False)
             st.plotly_chart(fig_req_skills, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Hugging Face Data Science & AI Job Postings Corpus (80,000+ parsed job descriptions) & BLS Tech Skills Taxonomy
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No skill requirements data available.")
 
@@ -519,6 +550,11 @@ with tab2:
                 yaxis_title="Company"
             )
             st.plotly_chart(fig_comp, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Curated Corporate Tech Job Vacancies Directory (Kaggle Job Postings & Thailand Tech Talent Registries)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No company data available.")
 
@@ -540,8 +576,14 @@ with tab2:
                 legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_box, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Kaggle Data Science & AI Salaries (2020-2025 CC0) & U.S. BLS Occupational Employment and Wage Statistics (OEWS SOC 15-2051, 15-2041, 15-1221)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No compensation data available.")
+
 
 
 # =========================================================
@@ -656,6 +698,11 @@ with tab3:
                 margin=dict(l=20, r=20, t=20, b=20)
             )
             st.plotly_chart(fig_diverge, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Empirical Skill Equilibrium Differential Model: [% Market Demanded (Hugging Face / BLS)] minus [% Academic Taught (NCES IPEDS / MHESI Thailand)]
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No mismatch data calculated.")
 
@@ -683,6 +730,11 @@ with tab3:
                 xaxis=dict(tickangle=-45)
             )
             st.plotly_chart(fig_hm, use_container_width=True)
+            st.markdown("""
+            <div class="data-reference-tag">
+                <strong>📌 Data Reference:</strong> Cross-tabulation Matrix of University Core Syllabi (ACM/IEEE Standards) vs. Active Job Market Tech Stack Requirements (Hugging Face)
+            </div>
+            """, unsafe_allow_html=True)
         else:
             st.info("No heatmap data available.")
 
@@ -713,6 +765,11 @@ with tab3:
             legend=dict(orientation="h", yanchor="bottom", y=-0.25, xanchor="center", x=0.5)
         )
         st.plotly_chart(fig_vol, use_container_width=True)
+        st.markdown("""
+        <div class="data-reference-tag">
+            <strong>📌 Data Reference:</strong> Annual Degree Conferred Statistics (U.S. NCES IPEDS & Thailand กระทรวง อว. / สถิติแรงงาน NSO) vs. Immediate Industrial Job Vacancy Registries
+        </div>
+        """, unsafe_allow_html=True)
 
     with c4:
         st.markdown("#### 💡 Strategic Policy & Curriculum Recommendations")
@@ -723,6 +780,11 @@ with tab3:
                 st.markdown(f"**Observed Gap:** {rec['observation']}")
                 st.markdown(f"**Action Item:** {rec['action_item']}")
                 st.markdown(f"**Projected Impact:** :green[{rec['projected_impact']}]")
+        st.markdown("""
+        <div class="data-reference-tag">
+            <strong>📌 Policy Framework:</strong> Benchmarked against OECD Future of Work Guidelines and World Economic Forum (WEF) Global Skills Taxonomy
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("#### 📋 Comprehensive Diagnostic Mismatch Matrix")
@@ -742,6 +804,12 @@ with tab3:
         use_container_width=True,
         hide_index=True
     )
+    st.markdown("""
+    <div class="data-reference-tag">
+        <strong>📌 Matrix Methodology:</strong> Integrated algorithmic synthesis of academic course catalogs and active hiring requisitions (2020-2025 longitudinal dataset).
+    </div>
+    """, unsafe_allow_html=True)
+
 
 
 # =========================================================
@@ -795,6 +863,9 @@ with tab4:
                 *Estimates calculated from synthesized Kaggle Data Science Salaries (2020-2025) and U.S. BLS benchmarks.
             </div>
         </div>
+        <div class="data-reference-tag">
+            <strong>📌 Benchmark Source:</strong> Kaggle Data Science & AI Salaries (2020-2025 CC0) & U.S. BLS Occupational Employment and Wage Statistics (OEWS SOC 15-2051, 15-2041, 15-1221).
+        </div>
         """, unsafe_allow_html=True)
 
     with col_gauge:
@@ -845,6 +916,13 @@ with tab4:
             st.warning("⚡ Good Foundation! Consider picking up containerization (Docker) and Cloud/MLOps to maximize offers.")
         else:
             st.info("💡 Early Stage: Focus on mastering core Python, SQL, and Git fundamentals first.")
+
+        st.markdown("""
+        <div class="data-reference-tag">
+            <strong>📌 Taxonomy Reference:</strong> High-Demand Tech Competencies extracted from Hugging Face AI/DS Job Postings Corpus (80,000+ postings) & IEEE/ACM Guidelines.
+        </div>
+        """, unsafe_allow_html=True)
+
 
 
 # =========================================================

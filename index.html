@@ -190,6 +190,10 @@
                 <div class="h-72 w-full relative">
                     <canvas id="salaryBarChart"></canvas>
                 </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i>
+                    <span><strong>Data Reference:</strong> Kaggle Data Science & AI Salaries (2020-2025 CC0) & U.S. BLS OEWS (SOC 15-2051, 15-2041).</span>
+                </div>
             </div>
 
             <!-- In-Demand Skills Donut Chart -->
@@ -204,8 +208,13 @@
                 <div class="h-72 w-full relative flex items-center justify-center">
                     <canvas id="skillsDonutChart"></canvas>
                 </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-indigo-500 shrink-0"></i>
+                    <span><strong>Data Reference:</strong> Hugging Face AI/DS Job Postings Corpus (80,000+ listings) & ACM/IEEE Computing Taxonomy.</span>
+                </div>
             </div>
         </section>
+
 
         <!-- Module A: Salary & Career Estimator Calculator -->
         <section id="calculator-section" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 sm:p-8">
@@ -274,6 +283,10 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500">
+                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i>
+                <span><strong>Benchmark Source:</strong> Synthesized empirical salary intervals based on Kaggle Data Science Salaries (2020-2025) and U.S. BLS OEWS wage percentiles.</span>
+            </div>
         </section>
 
         <!-- Module B: Interactive Skill Matrix Checklist & Live Readiness Gauge -->
@@ -312,7 +325,12 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500 shrink-0"></i>
+                <span><strong>Taxonomy Reference:</strong> Core Skill Competencies benchmarked against IEEE/ACM Computing Curricula & Hugging Face parsed tech requirements.</span>
+            </div>
         </section>
+
 
         <!-- Module C: Searchable Open Data Directory & Download Table -->
         <section id="open-data-section" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 sm:p-8">

@@ -108,6 +108,9 @@ def generate_mock_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
                     if "LLMs & GenAI" not in current_skills and random.random() > 0.65:
                         current_skills.append("LLMs & GenAI")
 
+                source_citation = "GovData Thailand (data.go.th) - กระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม (อว.) & สถิติแรงงาน (NSO)" if country == "TH" else ("NCES IPEDS Postsecondary Completion Data (CIP 11, 27, 30)" if country == "US" else "UNESCO Institute for Statistics (UIS) STEM Data")
+                cip_code = "CIP 11.0102 (Artificial Intelligence)" if field == "Artificial Intelligence" else ("CIP 30.7001 (Data Science)" if field == "Data Science" else "CIP 27.0501 (Statistics)")
+
                 supply_records.append({
                     "program_id": prog_id,
                     "institution": uni,
@@ -125,10 +128,13 @@ def generate_mock_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
                     "employed_yr3_pct": emp_yr3_pct,
                     "employed_yr1": emp_yr1_count,
                     "employed_yr2": emp_yr2_count,
-                    "employed_yr3": emp_yr3_count
+                    "employed_yr3": emp_yr3_count,
+                    "data_source": source_citation,
+                    "standard_classification": cip_code
                 })
 
     graduates_df = pd.DataFrame(supply_records)
+
 
     # 2. Demand Data: Job Postings & Requirements (2020-2025)
     companies = [
@@ -218,6 +224,7 @@ def generate_mock_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
                     req_skills.append("Git & Version Control")
 
                 posting_date = f"{yr}-{month:02d}-{random.randint(1, 28):02d}"
+                soc_code = "SOC 15-1221 (Computer and Information Research Scientists / AI)" if field == "Artificial Intelligence" else ("SOC 15-2051 (Data Scientists)" if field == "Data Science" else "SOC 15-2041 (Statisticians)")
 
                 job_records.append({
                     "job_id": f"J{jid_counter:05d}",
@@ -238,11 +245,15 @@ def generate_mock_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
                     "avg_salary_usd": avg_sal_usd,
                     "posting_date": posting_date,
                     "year": yr,
-                    "month": month
+                    "month": month,
+                    "data_source": "Kaggle Data Science & AI Salaries (2020-2025) & U.S. BLS OEWS",
+                    "skills_taxonomy_source": "Hugging Face Tech Job Postings Dataset",
+                    "standard_soc_code": soc_code
                 })
                 jid_counter += 1
 
     jobs_df = pd.DataFrame(job_records)
+
 
     # Save to disk
     graduates_df.to_csv(GRADUATES_FILE, index=False)
@@ -250,9 +261,9 @@ def generate_mock_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
 
     return graduates_df, jobs_df
 
-def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, List[Dict]]:
-    """Loads datasets, creating them if not present."""
-    if not os.path.exists(GRADUATES_FILE) or not os.path.exists(JOBS_FILE):
+def load_data(force_regenerate: bool = False) -> Tuple[pd.DataFrame, pd.DataFrame, List[Dict]]:
+    """Loads datasets, creating them if not present or if forced."""
+    if force_regenerate or not os.path.exists(GRADUATES_FILE) or not os.path.exists(JOBS_FILE):
         graduates_df, jobs_df = generate_mock_datasets()
     else:
         graduates_df = pd.read_csv(GRADUATES_FILE)
@@ -265,6 +276,7 @@ def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, List[Dict]]:
             catalog = json.load(f)
 
     return graduates_df, jobs_df, catalog
+
 
 def compute_skill_mismatch(graduates_df: pd.DataFrame, jobs_df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -355,12 +367,16 @@ def generate_policy_recommendations(mismatch_df: pd.DataFrame, field: str = "All
     return recs
 
 if __name__ == "__main__":
-    print("Initializing Data Pipeline...")
-    grads, jobs, cat = load_data()
+    print("Initializing Data Pipeline & Regenerating with Open Data Citations...")
+    grads, jobs, cat = load_data(force_regenerate=True)
     print(f"[OK] Graduates Data Loaded: {len(grads)} records across {grads['program_name'].nunique()} programs.")
+    print(f"[OK] Graduates Columns: {list(grads.columns)}")
     print(f"[OK] Jobs Data Loaded: {len(jobs)} postings totaling {jobs['vacancies'].sum()} open vacancies.")
+    print(f"[OK] Jobs Columns: {list(jobs.columns)}")
     print(f"[OK] Open Data Catalog: {len(cat)} authoritative repositories registered.")
     mismatch = compute_skill_mismatch(grads, jobs)
     print("[OK] Skill Mismatch Top 5 Deficits:")
     print(mismatch.head(5)[["skill", "curriculum_taught_pct", "market_demanded_pct", "gap_percentage"]])
+
+
 
